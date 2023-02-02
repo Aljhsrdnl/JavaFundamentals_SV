@@ -79,7 +79,22 @@ public class MemorableQoutes {
 
     static void printQuoteWithNum(String quote, int index, int total) { 
         String[] splittedQuote = quote.split("@", 4);
+
+        //pass the parameter splittedQoute[0]
+        //update function
+        //to update the counter in the text file
         System.out.println(String.format("[%d/%d]  %s \n\t-- %s \n", index, total, splittedQuote[0], splittedQuote[1]));
+    }
+
+    static void incrementCounter(String qouteBody){
+        ArrayList <String> qoutes = readFile("qoutes.txt");
+
+        //loop and compare
+        int size = qoutes.size();
+        for(int i = 0; i < size; i++) {
+            String[] qouteSplitted = qoutes.get(i).split("@",4);
+            if(qoutes.get(i).split())
+        }
     }
 
     static void searchQuote(ArrayList<String> quotes, String keyword) {
@@ -109,7 +124,7 @@ public class MemorableQoutes {
 
     static void displayCategory(ArrayList <String> category) {
         int max = 5;
-        int delay = 1000;
+        int delay = 2000;
         for (int i = 0; i < max; i++) {
             String randomQuote = getRandomQuote(category);
             printQuoteWithNum(randomQuote, i+1, max);
@@ -122,7 +137,7 @@ public class MemorableQoutes {
         }
     }
     static void newDisplay(ArrayList <String> quotes, int max, int delay){
-        int ms = delay * 1000;
+        int ms = delay * 2000;
         for (int i = 0; i < max; i++) {
             String randomQuote = getRandomQuote(quotes);
             printQuoteWithNum(randomQuote, i+1, max);
