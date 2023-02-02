@@ -46,7 +46,7 @@ public class MemorableQoutes {
     static ArrayList<String> getJokes (ArrayList<String> quotes) {
         ArrayList <String> jokes = new ArrayList<String>();
         for(int i = 0; i < quotes.size(); i++) {
-            String [] currentQuote = quotes.get(i).split("@", 3);
+            String [] currentQuote = quotes.get(i).split("@", 4);
             if(currentQuote[2].equalsIgnoreCase("joke")) {
                 jokes.add(quotes.get(i));
             }
@@ -58,7 +58,7 @@ public class MemorableQoutes {
         ArrayList <String> motivational = new ArrayList <String> ();
 
         for(int i = 0; i < quotes.size(); i++) {
-            String [] currentQuote = quotes.get(i).split("@", 3);
+            String [] currentQuote = quotes.get(i).split("@", 4);
             if(currentQuote[2].equalsIgnoreCase("motivational")) {
                 motivational.add(quotes.get(i));
             }
