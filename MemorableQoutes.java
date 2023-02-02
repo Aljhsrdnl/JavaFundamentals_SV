@@ -38,9 +38,9 @@ public class MemorableQoutes {
         return qoutes;
     }
     static String getRandomQuote(ArrayList<String> quotes) {
+        // System.out.println(quotes.toString());
         Random random = new Random();
-        int index = random.nextInt(quotes.size());
-
+        int index = random.nextInt(quotes.size()); 
         return quotes.get(index);
     }
     static ArrayList<String> getJokes (ArrayList<String> quotes) {
@@ -68,7 +68,7 @@ public class MemorableQoutes {
     
     static void printAllQuote(ArrayList<String> quotes) {
         for(int i = 0; i < quotes.size(); i++) {
-            printQuote(quotes.get(i));
+            printQuote(quotes.get(i)); 
         }
     }
 
@@ -95,7 +95,6 @@ public class MemorableQoutes {
     }
     static void display(ArrayList<String> quotes) {
         while(true) {
-
             String randomQuote = getRandomQuote(quotes);
             printQuote(randomQuote);
             try {
@@ -111,7 +110,6 @@ public class MemorableQoutes {
     static void displayCategory(ArrayList <String> category) {
         int max = 5;
         int delay = 1000;
-
         for (int i = 0; i < max; i++) {
             String randomQuote = getRandomQuote(category);
             printQuoteWithNum(randomQuote, i+1, max);
@@ -141,8 +139,6 @@ public class MemorableQoutes {
         
         // createQoutes(quotes);
         quotes = readFile("qoutes.txt");
-
-        
         //check the args' length
         if(args.length == 0) {
             System.out.println("NO ARGUMENT FOUND. Please include an argument. Choose between: \n[random]\n[all]\n[search]");
