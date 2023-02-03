@@ -86,9 +86,6 @@ public class MemorableQoutes {
 
     static void printQuoteWithNum(String quote, int index, int total) { 
         String[] splittedQuote = quote.split("@", 4);
-
-        //pass the parameter splittedQoute[0]
-        //update function
         incrementCounter(quote);
         //to update the counter in the text file
         System.out.println(String.format("[%d/%d]  %s \n\t-- %s \nNumber of Times Displayed: %s", index, total, splittedQuote[0], splittedQuote[1], splittedQuote[3]));
@@ -96,7 +93,6 @@ public class MemorableQoutes {
 
     static void incrementCounter(String qouteBody){
         ArrayList <String> qoutes = readFile("qoutes.txt");
-
         //loop and compare
         int size = qoutes.size();
         for(int i = 0; i < size; i++) {
@@ -213,15 +209,16 @@ public class MemorableQoutes {
     }
 
     static void displayQouteToUpdate(int index) {
+        Scanner sc = new Scanner(System.in);
         ArrayList <String> qoutes = readFile("qoutes.txt");
         String[] splittedQoutes = qoutes.get(index).split("@",4);
         System.out.println(String.format("Qoute: %s\nAuthor: %s", splittedQoutes[0], splittedQoutes[1]));
-        System.out.println("Enter the following details to update the qoute.");
-        Scanner sc = new Scanner(System.in);
+        System.out.println("Supply the following details to update the qoute:");
         System.out.print("Qoute: ");
         String qoute = sc.nextLine();
         System.out.print("Author: ");
         String author = sc.nextLine();
+        sc.close();
         String category = splittedQoutes[2];
         String counter = splittedQoutes[3];
         updateQoute(qoute, author, index, category, counter);
@@ -229,8 +226,10 @@ public class MemorableQoutes {
     
     static void updateQoute(String qoute, String author, int index, String category, String counter) {
         ArrayList <String> qoutes = readFile("qoutes.txt");
-        String str = String.format("\n%s@%s@%s@s", qoute, author, category, counter);
+        String str = String.format("%s@%s@%s@%s", qoute, author, category, counter);
         qoutes.set(index, str);
+
+        System.out.println(qoutes.toString());
 
         //write to File
         try {
@@ -247,6 +246,7 @@ public class MemorableQoutes {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+        System.out.println("\nQOUTE HAS BEEN SUCCESSFULLY UPDATED! \n");
     }
 
     static void displayCategory(ArrayList <String> category) {
@@ -305,27 +305,25 @@ public class MemorableQoutes {
             String author = sc.nextLine();
             System.out.print("Category: ");
             String category = sc.nextLine();
-
+            // sc.close();
             addQoute(qoute, author, category);
         }
         else if (args[0].equalsIgnoreCase("deleteQoute")) {
             Scanner sc = new Scanner(System.in);
             System.out.print("Enter a word or phrase about the qoute you wanted to delete:");
             String key = sc.nextLine();
-            sc.close();
+            // sc.close();
             deleteQoute(key);
         }
         else if (args[0].equalsIgnoreCase("updateQoute")) {
             Scanner sc = new Scanner(System.in);
             System.out.print("Enter a word or phrase about the qoute you wanted to update:");
             String key = sc.nextLine();
-            sc.close();
+            // sc.close();
             //searchFunction
-            System.out.println(searchQoute(key));
-            
+            int index = searchQoute(key);
             //displayFunction
-            // Qoute:
-            // Author:
+           displayQouteToUpdate(index);
             
             //modifyFunction
         }
