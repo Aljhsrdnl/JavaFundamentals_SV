@@ -155,14 +155,44 @@ public class MemorableQoutes {
     }
 
     static void addQoute(String qoute, String author, String category) {
-        ArrayList <String> qoutes = readFile("qoutes.txt");
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("qoutes.txt", true))
-            String str = String.format("%s@%s@%s@0", qoute, author, category);
+            BufferedWriter writer = new BufferedWriter(new FileWriter("qoutes.txt", true));
+            String str = String.format("\n%s@%s@%s@0", qoute, author, category);
             writer.write(str);
             writer.close();
+            System.out.println(String.format("Qoute '%s' has been added.", qoute));
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    static void deleteQoute(String key) {
+        ArrayList <String> qoutes = readFile("qoutes.txt");
+
+        for(int i = 0; i < qoutes.size(); i++) {
+            Pattern pattern = Pattern.compile(key, Pattern.CASE_INSENSITIVE);
+            Matcher matcher = pattern.matcher(qoutes.get(i));
+            // boolean matchFound = matcher.find();
+
+            if(matcher.find()) {
+                qoutes.remove(i);
+            }
+        }
+
+        //write to file
+        try {
+            BufferedWriter fWriter = new BufferedWriter(new FileWriter("qoutes.txt"));
+            qoutes.forEach((q) -> {
+                try {
+                    fWriter.write(q);
+                    fWriter.newLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+            fWriter.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 
