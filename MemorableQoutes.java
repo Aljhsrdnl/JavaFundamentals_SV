@@ -194,6 +194,7 @@ public class MemorableQoutes {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+        System.out.println("SUCCESSFULLY REMOVED QOUTE.");
     }
 
     static void displayCategory(ArrayList <String> category) {
@@ -254,6 +255,13 @@ public class MemorableQoutes {
             String category = sc.nextLine();
 
             addQoute(qoute, author, category);
+        }
+        else if (args[0].equalsIgnoreCase("deleteQoute")) {
+            Scanner sc = new Scanner(System.in);
+            System.out.print("Enter a word or phrase about the qoute you wanted to delete:");
+            String key = sc.nextLine();
+            sc.close();
+            deleteQoute(key);
         }
         else if (args[0].startsWith("category")) {
             //check if parameter is correct;
