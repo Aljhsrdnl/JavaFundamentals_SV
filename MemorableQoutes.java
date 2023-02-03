@@ -43,8 +43,8 @@ public class MemorableQoutes {
         }
         return qoutes;
     }
-    static String getRandomQuote(ArrayList<String> quotes) {
-        // System.out.println(quotes.toString());
+    static String getRandomQuote() {
+        ArrayList <String> quotes = readFile("qoutes.txt");
         Random random = new Random();
         int index = random.nextInt(quotes.size()); 
         return quotes.get(index);
@@ -81,7 +81,7 @@ public class MemorableQoutes {
     static void printQuote(String quote) {
         String[] splittedQuote = quote.split("@", 4);
         incrementCounter(quote);
-        System.out.println(String.format("%s \n-- %s \n", splittedQuote[0], splittedQuote[1]));
+        System.out.println(String.format("%s \n-- %s \nNumber of Times Displayed: %s\n", splittedQuote[0], splittedQuote[1], splittedQuote[3]));
     }
 
     static void printQuoteWithNum(String quote, int index, int total) { 
@@ -91,7 +91,7 @@ public class MemorableQoutes {
         //update function
         incrementCounter(quote);
         //to update the counter in the text file
-        System.out.println(String.format("[%d/%d]  %s \n\t-- %s \n", index, total, splittedQuote[0], splittedQuote[1]));
+        System.out.println(String.format("[%d/%d]  %s \n\t-- %s \nNumber of Times Displayed: %s", index, total, splittedQuote[0], splittedQuote[1], splittedQuote[3]));
     }
 
     static void incrementCounter(String qouteBody){
@@ -142,7 +142,7 @@ public class MemorableQoutes {
     }
     static void display(ArrayList<String> quotes) {
         while(true) {
-            String randomQuote = getRandomQuote(quotes);
+            String randomQuote = getRandomQuote();
             printQuote(randomQuote);
             try {
                 Thread.sleep(3000);
@@ -154,11 +154,15 @@ public class MemorableQoutes {
 
     }
 
+    static void addQoute(String qoute) {
+
+    }
+
     static void displayCategory(ArrayList <String> category) {
         int max = 5;
         int delay = 2000;
         for (int i = 0; i < max; i++) {
-            String randomQuote = getRandomQuote(category);
+            String randomQuote = getRandomQuote();
             printQuoteWithNum(randomQuote, i+1, max);
             try {
                 Thread.sleep(delay);
@@ -171,7 +175,7 @@ public class MemorableQoutes {
     static void newDisplay(ArrayList <String> quotes, int max, int delay){
         int ms = delay * 2000;
         for (int i = 0; i < max; i++) {
-            String randomQuote = getRandomQuote(quotes);
+            String randomQuote = getRandomQuote();
             printQuoteWithNum(randomQuote, i+1, max);
             try {
                 Thread.sleep(ms);
@@ -192,7 +196,7 @@ public class MemorableQoutes {
             System.exit(0);
         }
         else if(args[0].equalsIgnoreCase("random")) {
-            String randomQuote = getRandomQuote(quotes);
+            String randomQuote = getRandomQuote();
             printQuote(randomQuote);
         }
         else if(args[0].equalsIgnoreCase("all")) {
@@ -200,6 +204,9 @@ public class MemorableQoutes {
         }
         else if(args[0].equalsIgnoreCase("search")) {
             searchQuote(quotes, args[1]);
+        }
+        else if (args[0].equalsIgnoreCase("addQoute")) {
+            
         }
         else if (args[0].startsWith("category")) {
             //check if parameter is correct;
