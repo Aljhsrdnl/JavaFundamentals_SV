@@ -154,8 +154,16 @@ public class MemorableQoutes {
 
     }
 
-    static void addQoute(String qoute) {
-
+    static void addQoute(String qoute, String author, String category) {
+        ArrayList <String> qoutes = readFile("qoutes.txt");
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("qoutes.txt", true))
+            String str = String.format("%s@%s@%s@0", qoute, author, category);
+            writer.write(str);
+            writer.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     static void displayCategory(ArrayList <String> category) {
@@ -206,7 +214,16 @@ public class MemorableQoutes {
             searchQuote(quotes, args[1]);
         }
         else if (args[0].equalsIgnoreCase("addQoute")) {
-            
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Provide the following information: \n");
+            System.out.print("Qoute: ");
+            String qoute = sc.nextLine();
+            System.out.print("Author: ");
+            String author = sc.nextLine();
+            System.out.print("Category: ");
+            String category = sc.nextLine();
+
+            addQoute(qoute, author, category);
         }
         else if (args[0].startsWith("category")) {
             //check if parameter is correct;
