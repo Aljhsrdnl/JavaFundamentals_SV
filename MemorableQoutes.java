@@ -197,6 +197,58 @@ public class MemorableQoutes {
         System.out.println("SUCCESSFULLY REMOVED QOUTE.");
     }
 
+    static int searchQoute(String key) {
+        ArrayList <String> qoutes = readFile("qoutes.txt");
+        int index=5;
+        for(int i = 0; i < qoutes.size(); i++) {
+            Pattern pattern = Pattern.compile(key, Pattern.CASE_INSENSITIVE);
+            Matcher matcher = pattern.matcher(qoutes.get(i));
+
+            if(matcher.find()) {
+                index = i;
+                return index;
+            }
+        }
+        return index;
+    }
+
+    static void displayQouteToUpdate(int index) {
+        ArrayList <String> qoutes = readFile("qoutes.txt");
+        String[] splittedQoutes = qoutes.get(index).split("@",4);
+        System.out.println(String.format("Qoute: %s\nAuthor: %s", splittedQoutes[0], splittedQoutes[1]));
+        System.out.println("Enter the following details to update the qoute.");
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Qoute: ");
+        String qoute = sc.nextLine();
+        System.out.print("Author: ");
+        String author = sc.nextLine();
+        String category = splittedQoutes[2];
+        String counter = splittedQoutes[3];
+        updateQoute(qoute, author, index, category, counter);
+    }
+    
+    static void updateQoute(String qoute, String author, int index, String category, String counter) {
+        ArrayList <String> qoutes = readFile("qoutes.txt");
+        String str = String.format("\n%s@%s@%s@s", qoute, author, category, counter);
+        qoutes.set(index, str);
+
+        //write to File
+        try {
+            BufferedWriter fWriter = new BufferedWriter(new FileWriter("qoutes.txt"));
+            qoutes.forEach((q) -> {
+                try {
+                    fWriter.write(q);
+                    fWriter.newLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+            fWriter.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
     static void displayCategory(ArrayList <String> category) {
         int max = 5;
         int delay = 2000;
@@ -262,6 +314,20 @@ public class MemorableQoutes {
             String key = sc.nextLine();
             sc.close();
             deleteQoute(key);
+        }
+        else if (args[0].equalsIgnoreCase("updateQoute")) {
+            Scanner sc = new Scanner(System.in);
+            System.out.print("Enter a word or phrase about the qoute you wanted to update:");
+            String key = sc.nextLine();
+            sc.close();
+            //searchFunction
+            System.out.println(searchQoute(key));
+            
+            //displayFunction
+            // Qoute:
+            // Author:
+            
+            //modifyFunction
         }
         else if (args[0].startsWith("category")) {
             //check if parameter is correct;
