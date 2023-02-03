@@ -1,10 +1,16 @@
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.regex.Pattern;
+
+import javax.sound.sampled.SourceDataLine;
+
 import java.util.regex.Matcher;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.BufferedWriter;
 
 public class MemorableQoutes {
     static void createQoutes(ArrayList<String> quotes) {
@@ -74,6 +80,7 @@ public class MemorableQoutes {
 
     static void printQuote(String quote) {
         String[] splittedQuote = quote.split("@", 4);
+        incrementCounter(quote);
         System.out.println(String.format("%s \n-- %s \n", splittedQuote[0], splittedQuote[1]));
     }
 
@@ -82,6 +89,7 @@ public class MemorableQoutes {
 
         //pass the parameter splittedQoute[0]
         //update function
+        incrementCounter(quote);
         //to update the counter in the text file
         System.out.println(String.format("[%d/%d]  %s \n\t-- %s \n", index, total, splittedQuote[0], splittedQuote[1]));
     }
@@ -93,9 +101,33 @@ public class MemorableQoutes {
         int size = qoutes.size();
         for(int i = 0; i < size; i++) {
             String[] qouteSplitted = qoutes.get(i).split("@",4);
-            if(qoutes.get(i).split())
+            String[] qouteBodySplitted = qouteBody.split("@", 4);
+            
+            if(qouteSplitted[0].equals(qouteBodySplitted[0])) {
+                int counter = Integer.parseInt(qouteBodySplitted[3]);
+                counter++;
+                qouteBodySplitted[3] = String.valueOf(counter); //int to string
+                String str = String.format("%s@%s@%s@%s", qouteBodySplitted[0], qouteBodySplitted[1], qouteBodySplitted[2], qouteBodySplitted[3]);
+                qoutes.set(i, str);
+            }
+        }
+        try {
+            BufferedWriter fWriter = new BufferedWriter(new FileWriter("qoutes.txt"));
+            qoutes.forEach((q) -> {
+                try {
+                    fWriter.write(q);
+                    fWriter.newLine();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+            fWriter.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
+
+    
 
     static void searchQuote(ArrayList<String> quotes, String keyword) {
         for(int i = 0; i < quotes.size(); i++) {
