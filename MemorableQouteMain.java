@@ -3,10 +3,10 @@ import java.util.ArrayList;
 public class MemorableQouteMain {
     public static void main(String[] args) {
         MemorableQouteDatabase qouteDB = new MemorableQouteDatabase();
-        int sizeQouteDB = MemorableQouteDatabase.getSize();
+        int sizeQouteDB = qouteDB.getSize();
 
         if(args.length == 0) {
-            System.out.println("No argument provided. You may choose between the following convention: \n[ java MemorableQoute all ]\n[ java MemorableQoute random ]\n[ java MemorableQoute search <search key> ]");
+            System.out.println("No argument provided. You may choose between the following convention: \n[ java MemorableQoute all ]\n[ java MemorableQoute random ]\n[ java MemorableQoute search <search key> ]\n[ java MemorableQoute display ]");
             System.exit(0);
         }
         else {
@@ -42,6 +42,10 @@ public class MemorableQouteMain {
                         System.out.println("Invalid parameters");
                     }
                     break;
+                case "display":
+                    MemorableQoutesDisplayShow instanceOne = new MemorableQoutesDisplayShow(qouteDB);
+                    instanceOne.execute(0, 2);
+                    break;
                 default:
                     System.out.println("Sorry, that argument is not available as of the moment.");
                     break;
@@ -49,9 +53,5 @@ public class MemorableQouteMain {
             }   
         }
 
-        // MemorableQoute randomQoute = MemorableQoute.getRandomQuote(sizeQouteDB, qouteDB);
-        // String qoute = randomQoute.getQoute();
-        // String reference = randomQoute.getReference();
-        // MemorableQoute.printQoute(qoute, reference);
     }
 }

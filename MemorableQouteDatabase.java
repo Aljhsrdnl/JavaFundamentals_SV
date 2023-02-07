@@ -15,7 +15,7 @@ public class MemorableQouteDatabase {
         qoutes.add(m4);
     }   
 
-    public static int getSize() {
+    public  int getSize() {
         return qoutes.size();
     }
 

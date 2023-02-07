@@ -67,50 +67,15 @@ public class MemorableQoute {
 
     public static void main(String[] args) {
         MemorableQouteDatabase qouteDB = new MemorableQouteDatabase();
-        int sizeQouteDB = MemorableQouteDatabase.getSize();
+        int sizeQouteDB = qouteDB.getSize();
         if(args.length == 0) {
             System.out.println("No argument provided. You may choose between the following convention: \n[ java MemorableQoute all ]\n[ java MemorableQoute random ]\n[ java MemorableQoute search <search key> ]");
             System.exit(0);
         }
         
-        //print all
-        // ArrayList <MemorableQoute> arr = qouteDB.getAllQoutes();
-        // System.out.println(arr);
-
         MemorableQoute randomQoute = getRandomQuote(sizeQouteDB, qouteDB);
         String qoute = randomQoute.getQoute();
         String reference = randomQoute.getReference();
         printQoute(qoute, reference);
-
-        // else {
-        //     switch(args[0]) {
-        //         case "all":
-        //             System.out.println("\nALL QOUTES:");
-        //             ArrayList <MemorableQoute> newArr = qouteDB.getAllQoutes();
-        //             newArr.forEach((q) -> {
-        //                 System.out.println(q.getQoute());
-        //             });
-        //         case "random":
-        //             MemorableQoute randomQoute = getRandomQuote(sizeQouteDB, qouteDB);
-        //             String qoute = randomQoute.getQoute();
-        //             String reference = randomQoute.getReference();
-        //             printQoute(qoute, reference);
-        //         case "search":
-        //             // text param has been provided
-        //             if(args.length > 1) {
-        //                 ArrayList <MemorableQoute> matchedArr = MemorableQouteDatabase.searchQoutes(args[1]);
-        //                 //display all matches
-        //                 matchedArr.forEach((match) -> {
-        //                     printQoute(match.getQoute(), match.getReference());
-        //                 });
-        //             }
-        //             else {
-        //                 System.out.println("Invalid parameters");
-        //             }
-        //             default:
-        //                 System.out.println("Sorry, that argument is not available as of the moment.");
-                    
-        //     }   
-        // }
     }
 }
