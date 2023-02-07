@@ -44,7 +44,22 @@ public class MemorableQouteMain {
                     break;
                 case "display":
                     MemorableQoutesDisplayShow instanceOne = new MemorableQoutesDisplayShow(qouteDB);
-                    instanceOne.execute(0, 2);
+                    if(args.length == 1 ) {
+                        instanceOne.execute(0, 3);
+                    }
+                    else if (args.length == 2 ) {
+                        String [] splitArgs = args[1].split("=", 2);
+                        int delayOrMax = Integer.parseInt(splitArgs[1]);
+                        if(splitArgs[0].equalsIgnoreCase("delay")){
+                            instanceOne.execute(0, delayOrMax);
+                        }
+                        else if(splitArgs[0].equalsIgnoreCase("max")){
+                            instanceOne.execute(delayOrMax, 3);
+                        }
+                        else {
+                            System.out.println("Sorry, unrecognized parameter.");
+                        }
+                    }
                     break;
                 default:
                     System.out.println("Sorry, that argument is not available as of the moment.");
