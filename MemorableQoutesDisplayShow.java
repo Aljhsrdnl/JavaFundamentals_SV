@@ -27,8 +27,7 @@ public class MemorableQoutesDisplayShow {
         if(maxQoutes <= 0) {
             while(true) {
                 MemorableQoute q = MemorableQoute.getRandomQuote(db.getSize(), db);
-                String randQoute = q.getQoute();
-                MemorableQoute.displayQoute(randQoute);
+                MemorableQoute.printQoute(q.getQoute(), q.getPrintCounter());
                 try {
                     Thread.sleep(delay*1000);
                 } catch (InterruptedException e) {
@@ -40,7 +39,7 @@ public class MemorableQoutesDisplayShow {
             for(int i = 0; i < maxQoutes; i++) {
                 MemorableQoute q = MemorableQoute.getRandomQuote(db.getSize(), db);
                 String randQoute = q.getQoute();
-                MemorableQoute.displayQoute(randQoute);
+                MemorableQoute.printQoute(q.getQoute(), q.getPrintCounter());
                 try {
                     Thread.sleep(delay*1000);
                 } catch (InterruptedException e) {

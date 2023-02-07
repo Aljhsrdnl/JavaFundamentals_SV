@@ -15,14 +15,16 @@ public class MemorableQouteMain {
                     System.out.println("\nALL QOUTES:");
                     ArrayList <MemorableQoute> newArr = qouteDB.getAllQoutes();
                     newArr.forEach((q) -> {
-                        System.out.println(q.getQoute());
+                        // System.out.println(q.getQoute());
+                        MemorableQoute.printQoute(q.getQoute(), q.getPrintCounter());
                     });
                     break;
                 case "random":
                     MemorableQoute randomQoute = MemorableQoute.getRandomQuote(sizeQouteDB, qouteDB);
                     String qoute = randomQoute.getQoute();
                     String reference = randomQoute.getReference();
-                    MemorableQoute.printQoute(qoute, reference);
+                    int counter = randomQoute.getPrintCounter();
+                    MemorableQoute.printQoute(qoute, counter);
                     break;
                 case "search":
                     // text param has been provided

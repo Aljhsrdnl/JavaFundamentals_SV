@@ -3,6 +3,7 @@ import java.util.Random;
 public class MemorableQoute {
     String qouteText;
     String reference;
+    int printCounter;
 
     public MemorableQoute(String qoute, String reference) {
         this.qouteText = qoute;
@@ -13,6 +14,7 @@ public class MemorableQoute {
     public void setQoute(String qoute) {
         this.qouteText = qoute;
     }
+    
     
     public String getQoute() {
         return this.qouteText;
@@ -27,6 +29,19 @@ public class MemorableQoute {
         return this.reference;
     }
 
+    //method for printCounter
+    public int getPrintCounter() {
+        return this.printCounter;
+    }
+
+    public void incrementCounter() {
+        this.printCounter++;
+    }
+
+    public void setPrintCounter(int printCounter) {
+        this.printCounter = printCounter;
+    }
+
     public static int getRandomIndex(int size) {
         Random rand = new Random();
         int index = rand.nextInt(size);
@@ -35,12 +50,12 @@ public class MemorableQoute {
 
     public static MemorableQoute getRandomQuote(int size, MemorableQouteDatabase qoutes) {
         int index = getRandomIndex(size);
-        return  qoutes.getQoute(index);
+        MemorableQoute q = qoutes.getQoute(index);
+        //increment counter
+        q.incrementCounter();
+        return  q;
     }
 
-    public static void displayQoute(String qoute) {
-        System.out.println(qoute);
-    }
 
     //method overloading
     public static void printQoute(String qoute) {
@@ -49,6 +64,10 @@ public class MemorableQoute {
 
     public static void printQoute(String qoute, String reference) {
         System.out.println(String.format("%s \n-- <%s>", qoute, reference));
+    }
+
+    public static void printQoute(String qoute, int counter) {
+        System.out.println(String.format("Times Displayed: [%d]\n%s", counter, qoute));
     }
 
     public static  boolean matches(MemorableQoute qoute, String text) {
