@@ -21,9 +21,6 @@ public class MemorableQoutesDisplayShow {
     }
 
     public void execute(int maxQoutes, int delay) {
-        //getRandomQoute();
-        //get random index first
-        // printRandomQOute();
         if(maxQoutes <= 0) {
             while(true) {
                 MemorableQoute q = MemorableQoute.getRandomQuote(db.getSize(), db);
@@ -48,4 +45,6 @@ public class MemorableQoutesDisplayShow {
             }
         }
     }
+
+    
 }

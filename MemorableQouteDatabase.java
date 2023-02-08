@@ -4,15 +4,21 @@ public class MemorableQouteDatabase {
     public static ArrayList <MemorableQoute> qoutes; //declaration
     public MemorableQouteDatabase(){
         qoutes = new ArrayList<MemorableQoute>();
-        MemorableQoute m1 = new MemorableQoute("Believe in yourself and all that you are. Know that there is something inside you that is greater than any obstacle. - Christian D. Larson", "Christian");   
-        MemorableQoute m2 = new MemorableQoute("Don't watch the clock; do what it does. Keep going. - Sam Levenson", "Sam");   
-        MemorableQoute m3 = new MemorableQoute("Success is not final, failure is not fatal: it is the courage to continue that counts. - Winston Churchill", "Winston");   
-        MemorableQoute m4 = new MemorableQoute("The only limit to our realization of tomorrow will be our doubts of today. - Franklin D. Roosevelt", "Franklin");   
+        MemorableQoute m1 = new MemorableQoute("Believe in yourself and all that you are. Know that there is something inside you that is greater than any obstacle. - Christian D. Larson", "Christian", "motivational");   
+        MemorableQoute m2 = new MemorableQoute("Don't watch the clock; do what it does. Keep going. - Sam Levenson", "Sam",  "motivational");   
+        MemorableQoute m3 = new MemorableQoute("Success is not final, failure is not fatal: it is the courage to continue that counts. - Winston Churchill", "Winston",  "joke");   
+        MemorableQoute m4 = new MemorableQoute("The only limit to our realization of tomorrow will be our doubts of today. - Franklin D. Roosevelt", "Franklin",  "joke");   
+        MemorableQoute m5 = new MemorableQoute("Why don't scientists trust atoms? Because they make up everything!", "Franklin",  "joke");   
+        MemorableQoute m6 = new MemorableQoute("I told my wife she was drawing her eyebrows too high. She looked surprised.", "Franklin",  "joke");   
+        
         //add qoutes
         qoutes.add(m1);
         qoutes.add(m2);
         qoutes.add(m3);
         qoutes.add(m4);
+        qoutes.add(m5);
+        qoutes.add(m6);
+        
     }   
 
     public  int getSize() {
@@ -69,6 +75,19 @@ public class MemorableQouteDatabase {
         return matchedQoutesArray;
     }
 
+    public static ArrayList <MemorableQoute> getAllBasedOnCategory(String category) {
+        //create an arrayList
+        ArrayList <MemorableQoute> arr = new ArrayList<MemorableQoute>();
+        // return this arrayList
+        // push all matches on the arraylist cased on the given category
+        qoutes.forEach(qoute -> {
+            String qouteCategory = qoute.getCategory();
+            if(qouteCategory.equalsIgnoreCase(category)) {
+                arr.add(qoute);
+            }
+        });
+        return arr;
+    }
 
 }
 

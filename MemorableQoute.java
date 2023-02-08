@@ -4,10 +4,12 @@ public class MemorableQoute {
     String qouteText;
     String reference;
     int printCounter;
+    String category;
 
-    public MemorableQoute(String qoute, String reference) {
+    public MemorableQoute(String qoute, String reference, String category) {
         this.qouteText = qoute;
         this.reference = reference;
+        this.category = category;
     }
     
     // method for qoute variable
@@ -40,6 +42,15 @@ public class MemorableQoute {
 
     public void setPrintCounter(int printCounter) {
         this.printCounter = printCounter;
+    }
+
+    //methods for category
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getCategory() {
+        return this.category;
     }
 
     public static int getRandomIndex(int size) {

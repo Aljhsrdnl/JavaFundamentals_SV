@@ -9,6 +9,26 @@ public class MemorableQouteMain {
             System.out.println("No argument provided. You may choose between the following convention: \n[ java MemorableQoute all ]\n[ java MemorableQoute random ]\n[ java MemorableQoute search <search key> ]\n[ java MemorableQoute display ]");
             System.exit(0);
         }
+        else if (args.length == 2) {
+            String [] splittedArgsTwo = args[1].split("=", 2);
+            ArrayList <MemorableQoute> arr = MemorableQouteDatabase.getAllBasedOnCategory(splittedArgsTwo[1]);
+            switch(args[0]) {
+                case "all":
+                    arr.forEach(qoute -> {
+                        MemorableQoute.printQoute(qoute.getQoute(), qoute.getCategory());
+                    });
+                    break;
+                case "random": 
+                    //get size of arr
+                    int arrSize = arr.size();
+                    //get randomIndex
+                    int randIndex = MemorableQoute.getRandomIndex(arrSize);
+                    // print qoute using the index
+                    MemorableQoute q = arr.get(randIndex);
+                    MemorableQoute.printQoute(q.getQoute(), q.getCategory());
+                    break;
+            }
+        }
         else {
             switch(args[0]) {
                 case "all":
@@ -22,7 +42,6 @@ public class MemorableQouteMain {
                 case "random":
                     MemorableQoute randomQoute = MemorableQoute.getRandomQuote(sizeQouteDB, qouteDB);
                     String qoute = randomQoute.getQoute();
-                    String reference = randomQoute.getReference();
                     int counter = randomQoute.getPrintCounter();
                     MemorableQoute.printQoute(qoute, counter);
                     break;
