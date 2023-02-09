@@ -1,4 +1,7 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class MemorableQouteDatabase {
     public static ArrayList <MemorableQoute> qoutes; //declaration
@@ -10,7 +13,6 @@ public class MemorableQouteDatabase {
         MemorableQoute m4 = new MemorableQoute("The only limit to our realization of tomorrow will be our doubts of today. - Franklin D. Roosevelt", "Franklin",  "joke");   
         MemorableQoute m5 = new MemorableQoute("Why don't scientists trust atoms? Because they make up everything!", "Franklin",  "joke");   
         MemorableQoute m6 = new MemorableQoute("I told my wife she was drawing her eyebrows too high. She looked surprised.", "Franklin",  "joke");   
-        
         //add qoutes
         qoutes.add(m1);
         qoutes.add(m2);
@@ -18,8 +20,23 @@ public class MemorableQouteDatabase {
         qoutes.add(m4);
         qoutes.add(m5);
         qoutes.add(m6);
-        
-    }   
+    }
+
+    public ArrayList<String> readFile(String fileName){
+        ArrayList <String> qoutes = new ArrayList<String>();
+        try {
+            File myFile = new File(fileName);
+            Scanner scanner = new Scanner(myFile);
+            while (scanner.hasNextLine()) {
+                qoutes.add(scanner.nextLine());
+            }
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error has occurred.");
+            e.printStackTrace();
+        }
+        return qoutes;
+    }
 
     public  int getSize() {
         return qoutes.size();
